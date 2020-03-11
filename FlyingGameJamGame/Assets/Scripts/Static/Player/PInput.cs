@@ -27,6 +27,10 @@ public class PInput : MonoBehaviour {
         m_LookInput = new Vector2(
             Input.GetAxis("Mouse X"), 
             Input.GetAxis("Mouse Y")) * m_PMain.stats.m_MouseSensitivity;
+
+        if (m_PMain.stats.m_InvertYAxis) {
+            m_LookInput.y *= -1.0f;
+        }
     }
 
     private void GetMoveInput() {

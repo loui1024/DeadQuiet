@@ -24,9 +24,18 @@ public class PCamera : MonoBehaviour {
 
     // Update is called once per frame
     private void Update() {
-        m_LookValue += m_PMain.m_PInput.m_LookInput * Time.deltaTime;
+
+        Look();
 
         UpdateCameraRotation();
+    }
+
+    private void Look() {
+        // Get look input.
+        m_LookValue += m_PMain.m_PInput.m_LookInput * Time.deltaTime;
+
+        // Clamp max Y angle.
+        m_LookValue.y = Mathf.Clamp(m_LookValue.y, m_PMain.stats.m_MaxY, m_PMain.stats.m_MinY);
     }
 
     private void UpdateCameraRotation() {

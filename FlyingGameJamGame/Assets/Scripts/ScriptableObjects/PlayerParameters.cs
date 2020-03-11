@@ -22,8 +22,12 @@ public class PlayerParameters : ScriptableObject {
 
     [Header("Camera")]
     public float m_MouseSensitivity;
+    public float m_MinY;
+    public float m_MaxY;
+    public bool m_InvertYAxis;
 
     [Header("Movement")]
     public float m_MoveSpeed;
     public float m_TurnSpeed;
+    [Range(0, 1)] public float m_SlowDownRate;
 }
