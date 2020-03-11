@@ -21,6 +21,7 @@ public class PlayerParameters : ScriptableObject {
     }
 
     [Header("Camera")]
+    public Vector3 cameraOffset;
     public float m_MouseSensitivity;
     public float m_MinY;
     public float m_MaxY;
@@ -32,6 +33,7 @@ public class PlayerParameters : ScriptableObject {
     [Range(0, 1)] public float m_SlowDownRate;
 
     [Header("Weapons")]
-    public List<WeaponBase> m_PlayerWeapons;
+    public LayerMask m_TargetingLayers;
+    public List<BWeapon> m_PlayerWeapons;
 
 }

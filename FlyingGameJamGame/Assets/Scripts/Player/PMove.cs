@@ -11,7 +11,8 @@ public class PMove : MonoBehaviour {
 
     private Quaternion m_TargetRotation;
     private Vector3 m_TargetPosition;
-    private Vector3 m_Velocity;
+
+    public Vector3 m_Velocity;
 
     // Start is called before the first frame update
     public void Init(PMain _pMain) {

@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: d84e992638f1ff344848bd33afde81ce, type: 3}
   m_Name: Laser
-  m_EditorClassIdentifier: Assembly-CSharp::BeamWeapon
+  m_EditorClassIdentifier: 
+  m_Model: {fileID: 0}
   m_Debris: {fileID: 0}
   m_Damage: 0
   m_Ammo: 1000
+  m_RateOfFire: 2000
+  m_FullAuto: 1
   m_Bursts: 1
   m_BurstDelay: 0
   m_BeamWidth: 0.5
-  m_BeamPrefab: {fileID: 0}

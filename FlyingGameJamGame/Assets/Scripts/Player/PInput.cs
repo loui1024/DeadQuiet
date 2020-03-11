@@ -55,6 +55,6 @@ public class PInput : MonoBehaviour {
         m_MoveInput = new Vector3(
             Input.GetAxis("Horizontal"),
             Input.GetAxis("ShipVertical"),
-            Input.GetAxis("Vertical")) * m_PMain.stats.m_MoveSpeed;
+            Input.GetAxis("Vertical")).normalized * m_PMain.stats.m_MoveSpeed;
     }
 }

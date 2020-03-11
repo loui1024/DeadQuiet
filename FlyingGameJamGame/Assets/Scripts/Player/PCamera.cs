@@ -12,33 +12,42 @@ public class PCamera : MonoBehaviour {
     private Camera m_Camera;
     private Vector2 m_LookValue;
 
+    private Transform m_WeaponsAnchor;
+
     // Start is called before the first frame update
     public void Init(PMain _pMain) {
         m_PMain = _pMain;
 
         m_Camera = SceneCamera.Instance.camera;
         m_LookValue = new Vector2(m_Camera.transform.localEulerAngles.y, m_Camera.transform.localEulerAngles.x);
+        
+        m_WeaponsAnchor = transform.Find("Weapons");
 
         SceneCamera.Instance.LockCursor(CursorLockMode.Locked);
     }
 
-    // Update is called once per frame
-    private void Update() {
-
+    private void Update()
+    {
         Look();
+    }
 
-        UpdateCameraRotation();
+    // Update is called once per frame
+    private void LateUpdate() {
+
+        SceneCamera.Instance.transform.SetPositionAndRotation(
+            transform.position + transform.rotation * PlayerParameters.Instance.cameraOffset, 
+            Quaternion.Euler(new Vector3(m_LookValue.y, m_LookValue.x, 0))
+            );
+
+        m_WeaponsAnchor.transform.rotation = SceneCamera.Instance.transform.rotation;
     }
 
     private void Look() {
+
         // Get look input.
         m_LookValue += m_PMain.m_PInput.m_LookInput * Time.deltaTime;
 
         // Clamp max Y angle.
         m_LookValue.y = Mathf.Clamp(m_LookValue.y, m_PMain.stats.m_MaxY, m_PMain.stats.m_MinY);
-    }
-
-    private void UpdateCameraRotation() {
-        m_Camera.transform.rotation = Quaternion.Euler(new Vector3(m_LookValue.y, m_LookValue.x, 0));
     }
 }

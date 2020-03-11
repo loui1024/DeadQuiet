@@ -12,17 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718d7dfe316ef134e97718a8674c940d, type: 3}
   m_Name: PlayerParameters
   m_EditorClassIdentifier: 
+  cameraOffset: {x: 0, y: 0.44, z: 0}
   m_MouseSensitivity: 60
   m_MinY: 80
   m_MaxY: -80
   m_InvertYAxis: 0
   m_MoveSpeed: 10
-  m_TurnSpeed: 10
+  m_TurnSpeed: 15
   m_SlowDownRate: 0.015
+  m_TargetingLayers:
+    serializedVersion: 2
+    m_Bits: 1
   m_PlayerWeapons:
-  - {fileID: 11400000, guid: 7af2c0d15a2b64844ac9815e31b74745, type: 2}
-  - {fileID: 11400000, guid: 65d8530325d51a943890b5080077986c, type: 2}
   - {fileID: 11400000, guid: ca578f0d7bb69ba49a16f34221d0230b, type: 2}
-  - {fileID: 11400000, guid: f55f183b3b184cf429b3fda1d6c917c4, type: 2}
-  - {fileID: 11400000, guid: eb5a856fdea165f459ba226eb0568878, type: 2}
-  - {fileID: 11400000, guid: c3d86a166c3c20747b5d4c5e7b26cba3, type: 2}
+  - {fileID: 11400000, guid: 7af2c0d15a2b64844ac9815e31b74745, type: 2}
+  - {fileID: 11400000, guid: 01f6db621053521488caa2257a9e39df, type: 2}
+  - {fileID: 11400000, guid: d6fe0d489a8e07d40bb9c624329ffbb6, type: 2}
+  - {fileID: 11400000, guid: 9a5d9366ef87f3d4ead78c9184d2bdad, type: 2}
+  - {fileID: 11400000, guid: df9e95ec0974bb54894e15123edbb090, type: 2}
