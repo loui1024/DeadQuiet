@@ -14,8 +14,10 @@ public class PMain : BHealth {
     [HideInInspector] public PCamera m_PCamera;
     [HideInInspector] public PShoot m_PShoot;
 
-    private void Start() {
+    protected override void Awake() {
         Init();
+
+        base.Awake();
     }
 
     private void Init() {

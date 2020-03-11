@@ -19,4 +19,11 @@ public class PlayerParameters : ScriptableObject {
             return m_Instance;
         }
     }
+
+    [Header("Camera")]
+    public float m_MouseSensitivity;
+
+    [Header("Movement")]
+    public float m_MoveSpeed;
+    public float m_TurnSpeed;
 }

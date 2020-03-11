@@ -11,7 +11,7 @@ public class BHealth : MonoBehaviour {
     public float m_MaxHealth = 100.0f;
     public float m_CurrHealth { get; private set; }
 
-    public virtual void Awake() {
+    protected virtual void Awake() {
         Init();
     }
 
