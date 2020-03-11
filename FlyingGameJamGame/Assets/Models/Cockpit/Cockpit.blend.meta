@@ -1,0 +1,136 @@
+fileFormatVersion: 2
+guid: a17c1e0bf69969544ae566cbe1eca9b7
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Altimeter
+    100002: Attitude Indicator
+    100004: Camera
+    100006: Cockpit
+    100008: //RootNode
+    100010: Flight Stick
+    100012: Glass
+    100014: Seat
+    100016: Sun
+    100018: Thrust Stick
+    400000: Altimeter
+    400002: Attitude Indicator
+    400004: Camera
+    400006: Cockpit
+    400008: //RootNode
+    400010: Flight Stick
+    400012: Glass
+    400014: Seat
+    400016: Sun
+    400018: Thrust Stick
+    2000000: Camera
+    2100000: No Name
+    2300000: Altimeter
+    2300002: Attitude Indicator
+    2300004: Cockpit
+    2300006: Flight Stick
+    2300008: Glass
+    2300010: Seat
+    2300012: Thrust Stick
+    3300000: Altimeter
+    3300002: Attitude Indicator
+    3300004: Cockpit
+    3300006: Flight Stick
+    3300008: Glass
+    3300010: Seat
+    3300012: Thrust Stick
+    4300000: Flight Stick
+    4300002: Thrust Stick
+    4300004: Altimeter
+    4300006: Attitude Indicator
+    4300008: Cockpit
+    4300010: Seat
+    4300012: Glass
+    10800000: Sun
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 1
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
