@@ -12,6 +12,10 @@ public class PInput : MonoBehaviour {
     public Vector2 m_LookInput;
     public Vector3 m_MoveInput;
 
+    public bool m_WeaponWheelInput;
+
+    public bool[] m_FireInput = new bool[2];
+
     // Start is called before the first frame update
     public void Init(PMain _pMain) {
         m_PMain = _pMain;
@@ -19,8 +23,22 @@ public class PInput : MonoBehaviour {
 
     // Update is called once per frame
     private void Update() {
+
+        GetShootInput();
+
+        GetWeaponWheelInput();
+
         GetLookInput();
         GetMoveInput();
+    }
+
+    private void GetShootInput() {
+        m_FireInput[0] = Input.GetMouseButton(0);
+        m_FireInput[1] = Input.GetMouseButton(1);
+    }
+
+    private void GetWeaponWheelInput() {
+        m_WeaponWheelInput = Input.GetKey(KeyCode.Tab) || Input.GetMouseButton(3);
     }
 
     private void GetLookInput() {

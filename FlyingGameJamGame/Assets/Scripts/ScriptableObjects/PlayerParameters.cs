@@ -30,4 +30,8 @@ public class PlayerParameters : ScriptableObject {
     public float m_MoveSpeed;
     public float m_TurnSpeed;
     [Range(0, 1)] public float m_SlowDownRate;
+
+    [Header("Weapons")]
+    public List<WeaponBase> m_PlayerWeapons;
+
 }

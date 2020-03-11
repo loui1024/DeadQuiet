@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: PlayerParameters
   m_EditorClassIdentifier: 
   m_MouseSensitivity: 60
+  m_MinY: 80
+  m_MaxY: -80
+  m_InvertYAxis: 0
   m_MoveSpeed: 10
-  m_TurnSpeed: 5
+  m_TurnSpeed: 10
+  m_SlowDownRate: 0.015
