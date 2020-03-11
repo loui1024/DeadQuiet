@@ -8,7 +8,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ProjectileWeapon", menuName = "Projectile Weapon", order = 1)]
 public class ProjectileWeapon : WeaponBase
 {
-    
+
+    public int m_RateOfFire;
+    public bool m_FullAuto;
+
     [Header("Projectile Parameters")]
     public float m_ProjectileSpeed;
     
@@ -27,18 +30,14 @@ public class BeamWeapon : WeaponBase
 
 public class WeaponBase : ScriptableObject {
 
-    [Header("ID")]
-    public int m_ID;
+    public GameObject m_Debris;
 
     [Header("Base Stats")]
     public float m_Damage;
-    public int m_RateOfFire;
     public int m_Ammo;
-    public bool m_FullAuto;
 
     [Header("Burst Fire")]
     public int m_Bursts;
     public float m_BurstDelay;
 
-    public GameObject m_Debris;
 }

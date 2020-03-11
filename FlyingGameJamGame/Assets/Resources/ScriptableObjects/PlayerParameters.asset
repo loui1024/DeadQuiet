@@ -19,3 +19,10 @@ MonoBehaviour:
   m_MoveSpeed: 10
   m_TurnSpeed: 10
   m_SlowDownRate: 0.015
+  m_PlayerWeapons:
+  - {fileID: 11400000, guid: 7af2c0d15a2b64844ac9815e31b74745, type: 2}
+  - {fileID: 11400000, guid: 65d8530325d51a943890b5080077986c, type: 2}
+  - {fileID: 11400000, guid: ca578f0d7bb69ba49a16f34221d0230b, type: 2}
+  - {fileID: 11400000, guid: f55f183b3b184cf429b3fda1d6c917c4, type: 2}
+  - {fileID: 11400000, guid: eb5a856fdea165f459ba226eb0568878, type: 2}
+  - {fileID: 11400000, guid: c3d86a166c3c20747b5d4c5e7b26cba3, type: 2}

@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Railgun
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileWeapon
-  m_Damage: 0
-  m_RateOfFire: 0
-  m_Ammo: 0
-  m_FullAuto: 0
-  m_Bursts: 0
-  m_BurstDelay: 0
   m_Debris: {fileID: 0}
-  m_ProjectileSpeed: 0
-  m_ProjectileDrag: 0
+  m_Damage: 0
+  m_Ammo: 0
+  m_Bursts: 1
+  m_BurstDelay: 0
+  m_RateOfFire: 30
+  m_FullAuto: 0
+  m_ProjectileSpeed: 300
   m_ProjectilePrefab: {fileID: 0}
