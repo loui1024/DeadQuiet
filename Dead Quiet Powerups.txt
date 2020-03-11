@@ -1,0 +1,16 @@
+Dead Quiet Ship Powerups:
+Temporary Infinite Ammunition / No Cost
+10 Seconds
+"This illegal temporary upgrade is brought to you by the General Ammunatics Corporation, pilot your
+weapon systems for a short time without worrying about ammunition costs."
+
+Temporary Invulnerability / EctoEngine
+10 Seconds
+"This illegal temporary upgrade is brought to you by the General Ammunatics Corporation, using fresh
+ectoplasm harvested from SpaceGhosts, we have made your entire ship, pilot and weapon systems included
+intangible."
+
+Instant Kill / Insta-kill
+10 Seconds
+"This illegal temporary upgrade is brought to you by the General Ammunatics Corporation, we jacked up
+your weapons damage modifier to deal so much damage, it wipes out anything your weapons touch."
