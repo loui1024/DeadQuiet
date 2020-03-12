@@ -11,6 +11,7 @@ public class PCamera : MonoBehaviour {
 
     private Camera m_Camera;
     private Vector2 m_LookValue;
+    private Vector3 m_Momentum;
 
     private Transform m_WeaponsAnchor;
 
@@ -20,26 +21,30 @@ public class PCamera : MonoBehaviour {
 
         m_Camera = SceneCamera.Instance.camera;
         m_LookValue = new Vector2(m_Camera.transform.localEulerAngles.y, m_Camera.transform.localEulerAngles.x);
-        
+
         m_WeaponsAnchor = transform.Find("Weapons");
 
         SceneCamera.Instance.LockCursor(CursorLockMode.Locked);
     }
 
-    private void Update()
-    {
+    private void Update() {
         Look();
+        Move();
     }
 
     // Update is called once per frame
     private void LateUpdate() {
 
         SceneCamera.Instance.transform.SetPositionAndRotation(
-            transform.position + transform.rotation * PlayerParameters.Instance.cameraOffset, 
+            transform.position + transform.rotation * (PlayerParameters.Instance.cameraOffset + m_Momentum),
             Quaternion.Euler(new Vector3(m_LookValue.y, m_LookValue.x, 0))
             );
 
         m_WeaponsAnchor.transform.rotation = SceneCamera.Instance.transform.rotation;
+    }
+
+    private void Move() {
+        m_Momentum = transform.rotation * m_PMain.m_PMove.m_Velocity / 200;
     }
 
     private void Look() {

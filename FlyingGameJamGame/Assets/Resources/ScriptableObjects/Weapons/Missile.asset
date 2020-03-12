@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Model: {fileID: 0}
   m_Debris: {fileID: 0}
+  m_CollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
   m_Damage: 0
-  m_Ammo: 0
-  m_RateOfFire: 0
+  m_Ammo: 100
+  m_RateOfFire: 60
   m_FullAuto: 0
-  m_Bursts: 0
-  m_BurstDelay: 0
-  m_ProjectileSpeed: 0
-  m_Lifetime: 0
+  m_ExplosionRadius: 0
+  m_Bursts: 3
+  m_BurstDelay: 0.15
+  m_ProjectileSpeed: 2000
+  m_Lifetime: 3

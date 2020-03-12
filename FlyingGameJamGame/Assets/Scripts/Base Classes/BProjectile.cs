@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿//  Copyright © Loui Eriksson
+//  All Rights Reserved.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,12 +27,13 @@ public class BProjectile : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
-        if (m_Lifetime <= stats.m_Lifetime)
-        {
+    private void Update() {
+        if (m_Lifetime <= stats.m_Lifetime) {
 
             Turn();
             Move();
+
+            CheckCollision();
 
             transform.SetPositionAndRotation(m_TargetPosition, m_TargetRotation);
 
@@ -37,6 +41,21 @@ public class BProjectile : MonoBehaviour {
         }
         else {
             Hit(null);
+        }
+    }
+
+    protected virtual void CheckCollision() {
+
+        RaycastHit hit;
+
+        if (Physics.Linecast(transform.position, m_TargetPosition, out hit, stats.m_CollisionLayers, QueryTriggerInteraction.Ignore)) {
+
+            transform.up = hit.normal;
+            transform.position = hit.point;
+
+            BHealth other = hit.transform.GetComponent<BHealth>();
+
+            Hit(other);
         }
     }
 
@@ -49,14 +68,33 @@ public class BProjectile : MonoBehaviour {
     }
 
     protected virtual void Hit(BHealth _other) {
-        if (_other) {
-            _other.TakeDamage(stats.m_Damage);
+        if (stats.m_ExplosionRadius != 0) {
+            if (_other) {
+                _other.TakeDamage(stats.m_Damage);
+            }
         }
 
         DestroyProjectile();
     }
 
     protected virtual void DestroyProjectile() {
+
+        if (stats.m_Debris) {
+            Instantiate(stats.m_Debris, transform.position, transform.rotation);
+        }
+
+        if (stats.m_ExplosionRadius != 0) {
+
+            foreach (Collider col in Physics.OverlapSphere(transform.position, stats.m_ExplosionRadius, stats.m_CollisionLayers)) {
+
+                BHealth other;
+
+                if (other = col.GetComponent<BHealth>()) {
+                    other.TakeDamage(stats.m_Damage);
+                }
+            }
+        }
+
         Destroy(gameObject);
     }
 }
