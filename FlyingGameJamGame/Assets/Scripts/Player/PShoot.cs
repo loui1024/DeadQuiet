@@ -15,6 +15,7 @@ public class PShoot : MonoBehaviour {
     private bool[] m_FireInputLastFrame = new bool[2];
     private float[,] m_Cooldowns = new float[2, 6];
     private float[] m_MinigunTurnSpeed = new float[2];
+    private float[] m_WeaponCharge = new float[2];
 
     private Transform[] m_WeaponAnchors = new Transform[2];
     public GameObject[] m_BeamEffects = new GameObject[2];
@@ -102,7 +103,7 @@ public class PShoot : MonoBehaviour {
          *  REPLACE WITH ACTUAL ANIMATIONS IF IMPLEMENTING PROPERLY!
          */
 
-        if (m_CurrWeapons[_index] == 0) {
+        if (m_CurrWeapons[_index] != 0) {
             m_MinigunTurnSpeed[_index] = Mathf.Lerp(m_MinigunTurnSpeed[_index], 200.0f, Time.deltaTime * 3.0f);
         }
         else {
@@ -126,7 +127,7 @@ public class PShoot : MonoBehaviour {
             m_RecoilTargets[_index] = Mathf.Lerp(m_RecoilTargets[_index], 0, Time.deltaTime * 10.0f);
         }
 
-        m_WeaponAnchors[_index].transform.localPosition = Vector3.Lerp(m_WeaponAnchors[_index].transform.localPosition, m_DefaultTargets[_index] + transform.forward * -m_RecoilTargets[_index] * 0.5f, Time.deltaTime * 15.0f);
+        m_WeaponAnchors[_index].transform.localPosition = Vector3.Lerp(m_WeaponAnchors[_index].transform.localPosition, (transform.rotation * m_DefaultTargets[_index]) + transform.forward * -m_RecoilTargets[_index] * 0.5f, Time.deltaTime * 15.0f);
     }
 
     private IEnumerator Shoot(int _index, int _weaponID) {

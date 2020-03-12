@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfdc8d8db3a4dd5458e19ce45bc47996, type: 3}
   m_Name: Smart Bomb
   m_EditorClassIdentifier: 
-  m_Model: {fileID: 0}
-  m_Debris: {fileID: 0}
+  m_Model: {fileID: 666553630867702859, guid: 77285831e58b005438dc67d2d0774697, type: 3}
+  m_Debris: {fileID: 1000011797152326, guid: ecf65453fdeae1141baab14bd8378b00, type: 3}
   m_CollisionLayers:
     serializedVersion: 2
     m_Bits: 2049

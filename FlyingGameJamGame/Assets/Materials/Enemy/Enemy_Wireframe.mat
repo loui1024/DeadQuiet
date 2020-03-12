@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ground
+  m_Name: Enemy_Wireframe
   m_Shader: {fileID: 4800000, guid: a7de4bf0f370ca243b4604b8cd314ffc, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -63,7 +63,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MaxTriSize: 100
+    - _MaxTriSize: 4.4
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -72,11 +72,11 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WireSmoothness: 1
-    - _WireThickness: 300
+    - _WireSmoothness: 2.45
+    - _WireThickness: 142
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _WireColor: {r: 0.740566, g: 1, b: 0.9975581, a: 1}
+    - _WireColor: {r: 1, g: 0.90202916, b: 0, a: 1}
