@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TurretCameraFollow : MonoBehaviour
+{
+    [SerializeField] Transform m_Target;
+    [SerializeField] float m_TurnSpeed;
+
+    void LateUpdate()
+    {
+        LookAtTarget();
+    }
+
+    private void LookAtTarget() {
+        
+        Vector3 dir = m_Target.position - transform.position;
+        Quaternion rot = Quaternion.LookRotation(dir);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, m_TurnSpeed);
+
+    }
+}
