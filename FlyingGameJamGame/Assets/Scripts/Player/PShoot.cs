@@ -15,7 +15,7 @@ public class PShoot : MonoBehaviour {
     private bool[] m_FireInputLastFrame = new bool[2];
     private float[,] m_Cooldowns = new float[2, 6];
     private float[] m_MinigunTurnSpeed = new float[2];
-    private float[] m_WeaponCharge = new float[2];
+    public float[] m_WeaponCharge = new float[2];
 
     private Transform[] m_WeaponAnchors = new Transform[2];
     public GameObject[] m_BeamEffects = new GameObject[2];
@@ -58,7 +58,7 @@ public class PShoot : MonoBehaviour {
         for (int i = 0; i < 2; i++) {
 
             if (m_PMain.m_PInput.m_FireInput[i]) {
-                if (m_Cooldowns[i, m_CurrWeapons[i]] <= 0.0f) {
+                if (m_Cooldowns[i, m_CurrWeapons[i]] <= 0.0f && m_WeaponCharge[i] <= 0.0f) {
 
                     // Special conditions for single shot weapons.
                     bool canFire = true;
@@ -78,8 +78,12 @@ public class PShoot : MonoBehaviour {
                         m_Cooldowns[i, m_CurrWeapons[i]] = 60.0f / PlayerParameters.Instance.m_PlayerWeapons[m_CurrWeapons[i]].m_RateOfFire;
                     }
                 }
+
+                m_WeaponCharge[i] -= Time.deltaTime / PlayerParameters.Instance.m_PlayerWeapons[m_CurrWeapons[i]].m_ChargeTime;
             }
             else {
+                m_WeaponCharge[i] = 1;
+
                 m_FireInputLastFrame[i] = false;
 
                 m_BeamEffects[i].SetActive(false);
@@ -103,7 +107,7 @@ public class PShoot : MonoBehaviour {
          *  REPLACE WITH ACTUAL ANIMATIONS IF IMPLEMENTING PROPERLY!
          */
 
-        if (m_CurrWeapons[_index] != 0) {
+        if (m_CurrWeapons[_index] == 0) {
             m_MinigunTurnSpeed[_index] = Mathf.Lerp(m_MinigunTurnSpeed[_index], 200.0f, Time.deltaTime * 3.0f);
         }
         else {

@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfdc8d8db3a4dd5458e19ce45bc47996, type: 3}
   m_Name: Railgun
   m_EditorClassIdentifier: 
-  m_Model: {fileID: 0}
-  m_Debris: {fileID: 0}
+  m_Model: {fileID: 666553630867702859, guid: fa3f8e05974141f4fb2444ea9b9e24b6, type: 3}
+  m_Debris: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
   m_CollisionLayers:
     serializedVersion: 2
     m_Bits: 2561
-  m_Damage: 0
+  m_Damage: 100
   m_Ammo: 30
-  m_RateOfFire: 50
+  m_RateOfFire: 120
   m_FullAuto: 0
   m_ExplosionRadius: 30
+  m_ChargeTime: 0.5
   m_Bursts: 1
   m_BurstDelay: 0
-  m_ProjectileSpeed: 20000
+  m_ProjectileSpeed: 10000
   m_Lifetime: 0.35

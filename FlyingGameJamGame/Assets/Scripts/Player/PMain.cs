@@ -13,6 +13,7 @@ public class PMain : BHealth {
     [HideInInspector] public PMove m_PMove;
     [HideInInspector] public PCamera m_PCamera;
     [HideInInspector] public PShoot m_PShoot;
+    [HideInInspector] public PUI m_PUI;
 
     protected override void Awake() {
         Init();
@@ -35,6 +36,9 @@ public class PMain : BHealth {
 
         m_PShoot = gameObject.AddComponent<PShoot>();
         m_PShoot.Init(this);
+
+        m_PUI = gameObject.AddComponent<PUI>();
+        m_PUI.Init(this);
     }
 
     public override void TakeDamage(float _amount) {

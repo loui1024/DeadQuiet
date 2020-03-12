@@ -20,6 +20,9 @@ public class BWeapon : ScriptableObject {
     public bool m_FullAuto;
     public float m_ExplosionRadius;
 
+    [Header("Charge")]
+    public float m_ChargeTime;
+
     [Header("Burst Fire")]
     public int m_Bursts;
     public float m_BurstDelay;
