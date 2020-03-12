@@ -24,7 +24,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_PlayerWeapons:
-  - {fileID: 11400000, guid: ca578f0d7bb69ba49a16f34221d0230b, type: 2}
+  - {fileID: 11400000, guid: d6fe0d489a8e07d40bb9c624329ffbb6, type: 2}
   - {fileID: 11400000, guid: 7af2c0d15a2b64844ac9815e31b74745, type: 2}
   - {fileID: 11400000, guid: 01f6db621053521488caa2257a9e39df, type: 2}
   - {fileID: 11400000, guid: d6fe0d489a8e07d40bb9c624329ffbb6, type: 2}

@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfdc8d8db3a4dd5458e19ce45bc47996, type: 3}
   m_Name: Missile
   m_EditorClassIdentifier: 
-  m_Model: {fileID: 0}
-  m_Debris: {fileID: 0}
+  m_Model: {fileID: 666553630867702859, guid: 77285831e58b005438dc67d2d0774697, type: 3}
+  m_Debris: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
   m_CollisionLayers:
     serializedVersion: 2
-    m_Bits: 1
-  m_Damage: 0
+    m_Bits: 2561
+  m_Damage: 30
   m_Ammo: 100
   m_RateOfFire: 60
   m_FullAuto: 0
-  m_ExplosionRadius: 0
+  m_ExplosionRadius: 30
   m_Bursts: 3
   m_BurstDelay: 0.15
-  m_ProjectileSpeed: 2000
-  m_Lifetime: 3
+  m_ProjectileSpeed: 1000
+  m_Lifetime: 5

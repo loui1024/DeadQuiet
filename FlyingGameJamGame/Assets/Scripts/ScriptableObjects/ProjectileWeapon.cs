@@ -11,4 +11,5 @@ public class ProjectileWeapon : BWeapon {
     [Header("Projectile Parameters")]
     public float m_ProjectileSpeed;
     public float m_Lifetime;
+
 }

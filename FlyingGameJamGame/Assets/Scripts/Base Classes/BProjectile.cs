@@ -8,17 +8,24 @@ using UnityEngine;
 public class BProjectile : MonoBehaviour {
 
     public ProjectileWeapon stats;
+    
+    private Transform m_Target;
 
     protected Vector3 m_TargetPosition;
     protected Quaternion m_TargetRotation;
 
     private float m_Lifetime;
     private Vector3 m_ConstantVelocity;
-
+    
     // Start is called before the first frame update
-    public virtual void Init(ProjectileWeapon _stats, Vector3 _inheritedVelocity) {
+    public virtual void Init(ProjectileWeapon _stats, Vector3 _inheritedVelocity, BHealth _target) {
 
         stats = _stats;
+
+        if (_target)
+        {
+            m_Target = _target.transform;
+        }
 
         m_TargetPosition = transform.position;
         m_TargetRotation = transform.rotation;
@@ -60,7 +67,16 @@ public class BProjectile : MonoBehaviour {
     }
 
     protected virtual void Turn() {
-        m_TargetRotation = transform.rotation;
+
+        if (m_Target)
+        {
+            m_TargetRotation = Quaternion.LookRotation(m_Target.position - transform.position);
+        }
+        else
+        {
+            m_TargetRotation = transform.rotation;
+        }
+
     }
 
     protected virtual void Move() {
@@ -68,7 +84,7 @@ public class BProjectile : MonoBehaviour {
     }
 
     protected virtual void Hit(BHealth _other) {
-        if (stats.m_ExplosionRadius != 0) {
+        if (stats.m_ExplosionRadius == 0) {
             if (_other) {
                 _other.TakeDamage(stats.m_Damage);
             }

@@ -16,7 +16,7 @@ MonoBehaviour:
   m_Debris: {fileID: 0}
   m_CollisionLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2049
   m_Damage: 99999
   m_Ammo: 3
   m_RateOfFire: 60

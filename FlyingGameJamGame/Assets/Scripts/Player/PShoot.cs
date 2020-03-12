@@ -17,6 +17,7 @@ public class PShoot : MonoBehaviour {
     private float[] m_MinigunTurnSpeed = new float[2];
 
     private Transform[] m_WeaponAnchors = new Transform[2];
+    public GameObject[] m_BeamEffects = new GameObject[2];
 
     private float[] m_RecoilTargets = new float[2];
     private Vector3[] m_DefaultTargets = new Vector3[2];
@@ -27,6 +28,9 @@ public class PShoot : MonoBehaviour {
 
         m_WeaponAnchors[0] = transform.Find("Weapons/Left");
         m_WeaponAnchors[1] = transform.Find("Weapons/Right");
+
+        m_BeamEffects[0] = transform.Find("Weapons/Laser_Beam_Left").gameObject;
+        m_BeamEffects[1] = transform.Find("Weapons/Laser_Beam_Right").gameObject;
 
         m_DefaultTargets[0] = m_WeaponAnchors[0].position;
         m_DefaultTargets[1] = m_WeaponAnchors[1].position;
@@ -51,6 +55,7 @@ public class PShoot : MonoBehaviour {
 
         // Check weapon fire input and shoot.
         for (int i = 0; i < 2; i++) {
+
             if (m_PMain.m_PInput.m_FireInput[i]) {
                 if (m_Cooldowns[i, m_CurrWeapons[i]] <= 0.0f) {
 
@@ -75,6 +80,8 @@ public class PShoot : MonoBehaviour {
             }
             else {
                 m_FireInputLastFrame[i] = false;
+
+                m_BeamEffects[i].SetActive(false);
             }
 
             AnimateWeaponRecoil(i);
@@ -124,33 +131,96 @@ public class PShoot : MonoBehaviour {
 
     private IEnumerator Shoot(int _index, int _weaponID) {
 
+        BHealth target;
         BWeapon weapon = PlayerParameters.Instance.m_PlayerWeapons[m_CurrWeapons[_weaponID]];
 
         // Burst fire.
         for (int i = 0; i < weapon.m_Bursts; i++) {
 
-            if (m_PlayerAmmo[_weaponID] > 0) {
+            if (m_PlayerAmmo[_weaponID] > 0)
+            {
 
                 RecoilWeapons(_index);
-
-                // Projectile starting position on left / right of camera.
-                Vector3 pos = transform.position + (transform.rotation * new Vector3(((float)_index - 0.5f) * 8f, -1.5f, 1.0f));
-                Quaternion rot;
-
-                // Target the surface on the center of the screen.
-                RaycastHit hit;
-                if (Physics.Raycast(pos, SceneCamera.Instance.transform.forward, out hit, Mathf.Infinity, PlayerParameters.Instance.m_TargetingLayers, QueryTriggerInteraction.Ignore)) {
-                    rot = Quaternion.LookRotation(hit.point - pos);
-                }
-                else {
-                    rot = SceneCamera.Instance.transform.rotation;
-                }
-
-                // Instantiate projectile and initiate stats.
-                BProjectile projectile = Instantiate(weapon.m_Model, pos, rot).AddComponent<BProjectile>();
-                projectile.Init((ProjectileWeapon)weapon, m_PMain.m_PMove.m_Velocity);
-
                 m_PlayerAmmo[_weaponID]--;
+
+                if (weapon.GetType() == typeof(ProjectileWeapon))
+                {
+
+                    // Projectile starting position on left / right of camera.
+                    Vector3 pos = transform.position + (transform.rotation * new Vector3(((float)_index - 0.5f) * 8f, -1.5f, 1.0f));
+                    Quaternion rot;
+
+                    // Target the surface on the center of the screen.
+                    RaycastHit hit;
+                    if (Physics.Raycast(pos, SceneCamera.Instance.transform.forward, out hit, Mathf.Infinity, PlayerParameters.Instance.m_TargetingLayers, QueryTriggerInteraction.Ignore))
+                    {
+                        rot = Quaternion.LookRotation(hit.point - pos);
+                        
+                        target = hit.transform.GetComponent<BHealth>();
+                    }
+                    else
+                    {
+                        rot = SceneCamera.Instance.transform.rotation;
+
+                        target = null;
+                    }
+
+                    // Instantiate projectile and initiate stats.
+                    BProjectile projectile = Instantiate(weapon.m_Model, pos, rot).AddComponent<BProjectile>();
+                    
+                    projectile.Init((ProjectileWeapon)weapon, m_PMain.m_PMove.m_Velocity, target);
+
+                }
+                else
+                {
+
+                    GameObject beam = m_BeamEffects[_index];
+
+                    // Projectile starting position on left / right of camera.
+                    Vector3 pos = beam.transform.position;
+                    Quaternion rot;
+
+                    RaycastHit hit;
+
+                    float distance;
+
+                    if (Physics.Raycast(pos, SceneCamera.Instance.transform.forward, out hit, Mathf.Infinity, PlayerParameters.Instance.m_TargetingLayers, QueryTriggerInteraction.Ignore))
+                    {
+
+                        beam.transform.rotation = Quaternion.LookRotation(hit.point - pos);
+
+                        if (Physics.Raycast(pos, hit.point - pos, out hit, Mathf.Infinity, weapon.m_CollisionLayers, QueryTriggerInteraction.Ignore)) {
+
+                            BHealth health;
+
+                            if (health = hit.transform.GetComponent<BHealth>()) {
+                                health.TakeDamage(weapon.m_Damage);
+                            }
+                        }
+
+                        distance = (hit.point - pos).magnitude;
+                    }
+                    else
+                    {
+                        //rot = SceneCamera.Instance.transform.rotation;
+
+                        distance = 10000.0f;
+                    }
+
+                    //beam.transform.rotation = rot;
+
+                    Vector3 beamScale = beam.transform.localScale;
+                    beamScale.x = ((BeamWeapon)weapon).m_BeamWidth;
+                    beamScale.y = ((BeamWeapon)weapon).m_BeamWidth;
+                    beamScale.z = distance;
+
+                    beam.transform.localScale = beamScale;
+
+                    beam.SetActive(true);
+                }
+            }
+            else {
+                m_BeamEffects[_index].SetActive(false);
             }
 
             // Case for delay between bursts.
