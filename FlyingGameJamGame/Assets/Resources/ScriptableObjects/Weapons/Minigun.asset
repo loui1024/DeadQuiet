@@ -17,12 +17,18 @@ MonoBehaviour:
   m_CollisionLayers:
     serializedVersion: 2
     m_Bits: 2561
-  m_Damage: 1
-  m_Ammo: 400
-  m_RateOfFire: 600
+  m_Damage: 5
+  m_Ammo: 350
+  m_RateOfFire: 500
   m_FullAuto: 1
-  m_ExplosionRadius: 0
+  m_ExplosionRadius: 10
+  m_ChargeTime: 0
+  m_ShootSound: {fileID: 8300000, guid: c48bae54d09398745b943cd9c021556c, type: 3}
+  m_ShakeMagnitude: 0.2
+  m_ShakeFrequency: 2
+  m_ShakeDuration: 0.3
   m_Bursts: 1
   m_BurstDelay: 0
   m_ProjectileSpeed: 10000
   m_Lifetime: 1
+  m_TrackSpeed: 20

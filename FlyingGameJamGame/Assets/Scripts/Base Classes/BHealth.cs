@@ -1,8 +1,6 @@
 ﻿//  Copyright © Loui Eriksson
 //  All Rights Reserved.
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BHealth : MonoBehaviour {
@@ -37,9 +35,7 @@ public class BHealth : MonoBehaviour {
 
     public virtual void Die() {
 
-        /*
-         *  Dying code goes in here!
-         */
+        MusicManager.Instance.m_Intensity += 0.3f;
 
         Destroy(gameObject);
     }

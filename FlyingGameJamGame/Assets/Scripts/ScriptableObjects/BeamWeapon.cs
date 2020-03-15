@@ -1,8 +1,6 @@
 ﻿//  Copyright © Loui Eriksson
 //  All Rights Reserved.
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BeamWeapon", menuName = "Beam Weapon", order = 2)]

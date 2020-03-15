@@ -1,44 +1,38 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿//  Copyright © Loui Eriksson
+//  All Rights Reserved.
 
-public class GunAim:MonoBehaviour
-{
-	public int borderLeft;
-	public int borderRight;
-	public int borderTop;
-	public int borderBottom;
+using UnityEngine;
 
-	private Camera parentCamera;
-	private bool isOutOfBounds;
+public class GunAim : MonoBehaviour {
+    public int borderLeft;
+    public int borderRight;
+    public int borderTop;
+    public int borderBottom;
 
-	void Start () 
-	{
-		parentCamera = GetComponentInParent<Camera>();
-	}
+    private Camera parentCamera;
+    private bool isOutOfBounds;
 
-	void Update()
-	{
-		float mouseX = Input.mousePosition.x;
-		float mouseY = Input.mousePosition.y;
+    private void Start() {
+        parentCamera = GetComponentInParent<Camera>();
+    }
 
-		if (mouseX <= borderLeft || mouseX >= Screen.width - borderRight || mouseY <= borderBottom || mouseY >= Screen.height - borderTop) 
-		{
-			isOutOfBounds = true;
-		} 
-		else 
-		{
-			isOutOfBounds = false;
-		}
+    private void Update() {
+        float mouseX = Input.mousePosition.x;
+        float mouseY = Input.mousePosition.y;
 
-		if (!isOutOfBounds)
-		{
-			transform.LookAt(parentCamera.ScreenToWorldPoint (new Vector3(mouseX, mouseY, 5.0f)));
-		}
-	}
+        if (mouseX <= borderLeft || mouseX >= Screen.width - borderRight || mouseY <= borderBottom || mouseY >= Screen.height - borderTop) {
+            isOutOfBounds = true;
+        }
+        else {
+            isOutOfBounds = false;
+        }
 
-	public bool GetIsOutOfBounds()
-	{
-		return isOutOfBounds;
-	}
+        if (!isOutOfBounds) {
+            transform.LookAt(parentCamera.ScreenToWorldPoint(new Vector3(mouseX, mouseY, 5.0f)));
+        }
+    }
+
+    public bool GetIsOutOfBounds() {
+        return isOutOfBounds;
+    }
 }
-

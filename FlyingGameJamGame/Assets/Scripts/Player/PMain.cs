@@ -1,8 +1,6 @@
 ﻿//  Copyright © Loui Eriksson
 //  All Rights Reserved.
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PMain : BHealth {
@@ -50,6 +48,9 @@ public class PMain : BHealth {
     }
 
     public override void Die() {
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+
         base.Die();
     }
 }

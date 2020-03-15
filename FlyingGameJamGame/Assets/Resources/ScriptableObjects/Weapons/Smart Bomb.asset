@@ -22,7 +22,13 @@ MonoBehaviour:
   m_RateOfFire: 60
   m_FullAuto: 0
   m_ExplosionRadius: 1e+9
+  m_ChargeTime: 0
+  m_ShootSound: {fileID: 8300000, guid: 390feac92c83ad54bab0fa7733af3947, type: 3}
+  m_ShakeMagnitude: 3
+  m_ShakeFrequency: 3
+  m_ShakeDuration: 5
   m_Bursts: 1
   m_BurstDelay: 0
   m_ProjectileSpeed: 2000
   m_Lifetime: 5
+  m_TrackSpeed: 20

@@ -13,15 +13,20 @@ MonoBehaviour:
   m_Name: Laser
   m_EditorClassIdentifier: 
   m_Model: {fileID: 8231330022425060293, guid: 5a1edfb135915d348963e497652219bf, type: 3}
-  m_Debris: {fileID: 0}
+  m_Debris: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
   m_CollisionLayers:
     serializedVersion: 2
     m_Bits: 3073
-  m_Damage: 0
-  m_Ammo: 1000
-  m_RateOfFire: 2000
+  m_Damage: 8
+  m_Ammo: 200
+  m_RateOfFire: 800
   m_FullAuto: 1
   m_ExplosionRadius: 0
+  m_ChargeTime: 0
+  m_ShootSound: {fileID: 8300000, guid: 852ed2215c53e7b4bbc7bd53e1ad2fb5, type: 3}
+  m_ShakeMagnitude: 0.3
+  m_ShakeFrequency: 2
+  m_ShakeDuration: 0.1
   m_Bursts: 1
   m_BurstDelay: 0
   m_BeamWidth: 3

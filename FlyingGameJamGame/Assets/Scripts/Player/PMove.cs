@@ -1,8 +1,6 @@
 ﻿//  Copyright © Loui Eriksson
 //  All Rights Reserved.
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PMove : MonoBehaviour {
@@ -34,7 +32,7 @@ public class PMove : MonoBehaviour {
 
     private void Turn() {
         Vector3 eulerAngles = Quaternion.LookRotation(SceneCamera.Instance.transform.forward).eulerAngles;
-        eulerAngles.z = Mathf.SmoothStep(eulerAngles.z, 200.0f * -m_PMain.m_PInput.m_MoveInput.x, Time.deltaTime * 2.0f);
+        eulerAngles.z = Mathf.Clamp(Mathf.SmoothStep(eulerAngles.z, 200.0f * -m_PMain.m_PInput.m_MoveInput.x, Time.deltaTime * 2.0f), -20, 20);
 
         m_TargetRotation = Quaternion.Euler(eulerAngles);
     }
@@ -42,6 +40,18 @@ public class PMove : MonoBehaviour {
     private void Move() {
         m_Velocity += m_TargetRotation * m_PMain.m_PInput.m_MoveInput * Time.deltaTime;
         m_TargetPosition = transform.position + m_Velocity;
+
+        // Collide with obstacles.
+        RaycastHit hit;
+        if (Physics.Linecast(transform.position, m_TargetPosition, out hit, m_PMain.stats.m_CollisionLayers, QueryTriggerInteraction.Ignore)) {
+
+            // Bounce the player.
+            m_Velocity = Vector3.Reflect(m_Velocity, hit.normal) * 0.5f;
+            m_TargetPosition = hit.point + m_Velocity;
+
+            // Shake Camera.
+            StartCoroutine(m_PMain.m_PCamera.Shake(60.0f, 3.0f, 0.5f));
+        }
 
         m_Velocity *= 1.0f - Mathf.Clamp01(m_PMain.stats.m_SlowDownRate);
     }

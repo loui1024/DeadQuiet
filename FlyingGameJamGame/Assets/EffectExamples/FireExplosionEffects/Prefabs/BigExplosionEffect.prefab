@@ -14039,8 +14039,8 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000011797152326}
   serializedVersion: 6
-  lengthInSec: 3.5
-  simulationSpeed: 1
+  lengthInSec: 3
+  simulationSpeed: 2
   stopAction: 2
   cullingMode: 3
   ringBufferMode: 0
@@ -14455,7 +14455,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 0
     randomizeRotationDirection: 1
-    maxNumParticles: 300
+    maxNumParticles: 200
     size3D: 0
     rotation3D: 0
     gravityModifier:

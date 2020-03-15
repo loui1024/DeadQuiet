@@ -2,7 +2,6 @@
 //  All Rights Reserved.
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PCamera : MonoBehaviour {
@@ -54,5 +53,36 @@ public class PCamera : MonoBehaviour {
 
         // Clamp max Y angle.
         m_LookValue.y = Mathf.Clamp(m_LookValue.y, m_PMain.stats.m_MaxY, m_PMain.stats.m_MinY);
+    }
+
+    public IEnumerator Shake(float magnitude = 1.0f, float frequency = 10.0f, float duration = 1.0f) {
+
+        float time = 0.0f;
+        float progress = 0.0f;
+        float modifier = 0.0f;
+
+        Vector3 shake = new Vector3();
+
+        float offsetX = Random.Range(0.0f, magnitude);
+        float offsetY = Random.Range(0.0f, magnitude);
+
+        while (time < duration) {
+            progress = (time / duration);
+            modifier = 1.0f - progress;
+
+            float valX = Mathf.PerlinNoise((time * frequency) + offsetX, 0.5f);
+            float valY = Mathf.PerlinNoise(0.5f, (time * frequency) + offsetY);
+
+            shake = new Vector3(
+                (valX - 0.33f) * 1.0f,
+                (valY - 0.5f) * 1.0f,
+                0);
+
+            m_LookValue += (Vector2)shake * modifier;
+
+            time += Time.deltaTime;
+
+            yield return null;
+        }
     }
 }

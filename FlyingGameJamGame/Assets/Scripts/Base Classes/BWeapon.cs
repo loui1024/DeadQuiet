@@ -1,8 +1,6 @@
 ﻿//  Copyright © Loui Eriksson
 //  All Rights Reserved.
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BWeapon : ScriptableObject {
@@ -22,6 +20,14 @@ public class BWeapon : ScriptableObject {
 
     [Header("Charge")]
     public float m_ChargeTime;
+
+    [Header("Audio")]
+    public AudioClip m_ShootSound;
+
+    [Header("Shake")]
+    public float m_ShakeMagnitude;
+    public float m_ShakeFrequency;
+    public float m_ShakeDuration;
 
     [Header("Burst Fire")]
     public int m_Bursts;

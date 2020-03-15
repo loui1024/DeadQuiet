@@ -2,26 +2,26 @@
 //  All Rights Reserved.
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PShoot : MonoBehaviour {
 
     private PMain m_PMain;
 
-    private int[] m_PlayerAmmo = new int[6];
-    private int[] m_CurrWeapons = new int[2];
+    public int[] m_CurrWeapons { get; private set; } = new int[2];
+    public int[] m_PlayerAmmo { get; private set; } = new int[6];
+    public float[] m_WeaponCharge { get; private set; } = new float[2];
+    public GameObject[] m_BeamEffects { get; private set; } = new GameObject[2];
+
     private bool[] m_PlayerWeapons = new bool[6];
     private bool[] m_FireInputLastFrame = new bool[2];
     private float[,] m_Cooldowns = new float[2, 6];
     private float[] m_MinigunTurnSpeed = new float[2];
-    public float[] m_WeaponCharge = new float[2];
-
-    private Transform[] m_WeaponAnchors = new Transform[2];
-    public GameObject[] m_BeamEffects = new GameObject[2];
-
     private float[] m_RecoilTargets = new float[2];
     private Vector3[] m_DefaultTargets = new Vector3[2];
+    private GameObject[,] m_WeaponModels = new GameObject[2, 6];
+    private AudioSource[] m_WeaponAudio = new AudioSource[2];
+    private Transform[] m_WeaponAnchors = new Transform[2];
 
     // Start is called before the first frame update
     public void Init(PMain _pMain) {
@@ -38,6 +38,31 @@ public class PShoot : MonoBehaviour {
 
         for (int i = 0; i < 6; i++) {
             m_PlayerAmmo[i] = PlayerParameters.Instance.m_PlayerWeapons[i].m_Ammo;
+
+            for (int j = 0; j < 2; j++) {
+                try {
+                    m_WeaponModels[j, i] = m_WeaponAnchors[j].GetChild(i).gameObject;
+                }
+                catch { }
+            }
+        }
+
+        for (int i = 0; i < 2; i++) {
+            m_WeaponAudio[i] = m_WeaponAnchors[i].GetComponent<AudioSource>();
+        }
+
+        ChangeWeapon(0, 0);
+        ChangeWeapon(1, 0);
+    }
+
+    public void ChangeWeapon(int _index, int _weaponID) {
+
+        m_CurrWeapons[_index] = _weaponID;
+
+        for (int i = 0; i < 6; i++) {
+            if (m_WeaponModels[_index, i]) {
+                m_WeaponModels[_index, i].SetActive(i == m_CurrWeapons[_index]);
+            }
         }
     }
 
@@ -131,25 +156,29 @@ public class PShoot : MonoBehaviour {
             m_RecoilTargets[_index] = Mathf.Lerp(m_RecoilTargets[_index], 0, Time.deltaTime * 10.0f);
         }
 
-        m_WeaponAnchors[_index].transform.localPosition = Vector3.Lerp(m_WeaponAnchors[_index].transform.localPosition, (transform.rotation * m_DefaultTargets[_index]) + transform.forward * -m_RecoilTargets[_index] * 0.5f, Time.deltaTime * 15.0f);
+        //m_WeaponAnchors[_index].transform.localPosition = Vector3.Lerp(m_WeaponAnchors[_index].transform.localPosition, m_DefaultTargets[_index] + Vector3.forward * -m_RecoilTargets[_index] * 0.5f, Time.deltaTime * 15.0f);
     }
 
     private IEnumerator Shoot(int _index, int _weaponID) {
 
-        BHealth target;
-        BWeapon weapon = PlayerParameters.Instance.m_PlayerWeapons[m_CurrWeapons[_weaponID]];
+        BHealth target = null;
+        BWeapon weapon = PlayerParameters.Instance.m_PlayerWeapons[m_CurrWeapons[_index]];
 
         // Burst fire.
         for (int i = 0; i < weapon.m_Bursts; i++) {
 
-            if (m_PlayerAmmo[_weaponID] > 0)
-            {
+            if (m_PlayerAmmo[_weaponID] > 0) {
 
                 RecoilWeapons(_index);
                 m_PlayerAmmo[_weaponID]--;
 
-                if (weapon.GetType() == typeof(ProjectileWeapon))
-                {
+                StartCoroutine(m_PMain.m_PCamera.Shake(weapon.m_ShakeMagnitude, weapon.m_ShakeFrequency, weapon.m_ShakeDuration));
+
+                if (weapon.m_ShootSound) {
+                    m_WeaponAudio[_index].PlayOneShot(weapon.m_ShootSound);
+                }
+
+                if (weapon.GetType() == typeof(ProjectileWeapon)) {
 
                     // Projectile starting position on left / right of camera.
                     Vector3 pos = transform.position + (transform.rotation * new Vector3(((float)_index - 0.5f) * 8f, -1.5f, 1.0f));
@@ -157,27 +186,21 @@ public class PShoot : MonoBehaviour {
 
                     // Target the surface on the center of the screen.
                     RaycastHit hit;
-                    if (Physics.Raycast(pos, SceneCamera.Instance.transform.forward, out hit, Mathf.Infinity, PlayerParameters.Instance.m_TargetingLayers, QueryTriggerInteraction.Ignore))
-                    {
+                    if (Physics.Raycast(pos, SceneCamera.Instance.transform.forward, out hit, Mathf.Infinity, PlayerParameters.Instance.m_TargetingLayers, QueryTriggerInteraction.Ignore)) {
                         rot = Quaternion.LookRotation(hit.point - pos);
-                        
+
                         target = hit.transform.GetComponent<BHealth>();
                     }
-                    else
-                    {
+                    else {
                         rot = SceneCamera.Instance.transform.rotation;
-
-                        target = null;
                     }
 
                     // Instantiate projectile and initiate stats.
                     BProjectile projectile = Instantiate(weapon.m_Model, pos, rot).AddComponent<BProjectile>();
-                    
-                    projectile.Init((ProjectileWeapon)weapon, m_PMain.m_PMove.m_Velocity, target);
 
+                    projectile.Init((ProjectileWeapon)weapon, m_PMain.m_PMove.m_Velocity, target, m_PMain);
                 }
-                else
-                {
+                else {
 
                     GameObject beam = m_BeamEffects[_index];
 
@@ -189,8 +212,7 @@ public class PShoot : MonoBehaviour {
 
                     float distance;
 
-                    if (Physics.Raycast(pos, SceneCamera.Instance.transform.forward, out hit, Mathf.Infinity, PlayerParameters.Instance.m_TargetingLayers, QueryTriggerInteraction.Ignore))
-                    {
+                    if (Physics.Raycast(pos, SceneCamera.Instance.transform.forward, out hit, Mathf.Infinity, PlayerParameters.Instance.m_TargetingLayers, QueryTriggerInteraction.Ignore)) {
 
                         beam.transform.rotation = Quaternion.LookRotation(hit.point - pos);
 
@@ -205,14 +227,9 @@ public class PShoot : MonoBehaviour {
 
                         distance = (hit.point - pos).magnitude;
                     }
-                    else
-                    {
-                        //rot = SceneCamera.Instance.transform.rotation;
-
+                    else {
                         distance = 10000.0f;
                     }
-
-                    //beam.transform.rotation = rot;
 
                     Vector3 beamScale = beam.transform.localScale;
                     beamScale.x = ((BeamWeapon)weapon).m_BeamWidth;

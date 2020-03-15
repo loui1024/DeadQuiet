@@ -1,5 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//  Copyright © Loui Eriksson
+//  All Rights Reserved.
+
 using UnityEngine;
 
 public class SceneCamera : MonoBehaviour {
@@ -8,12 +9,10 @@ public class SceneCamera : MonoBehaviour {
 
     public static SceneCamera Instance {
         get {
-            if (!m_Instance)
-            {
+            if (!m_Instance) {
                 GameObject newCamera;
 
-                if (newCamera = GameObject.FindGameObjectWithTag("MainCamera"))
-                {
+                if (newCamera = GameObject.FindGameObjectWithTag("MainCamera")) {
                     if ((m_Instance = newCamera.GetComponent<SceneCamera>()) == null) {
                         m_Instance = newCamera.AddComponent<SceneCamera>();
                     }
@@ -35,6 +34,8 @@ public class SceneCamera : MonoBehaviour {
     public new Camera camera;
 
     public void LockCursor(CursorLockMode _cursorLockMode) {
+
         Cursor.lockState = _cursorLockMode;
+        Cursor.visible = _cursorLockMode != CursorLockMode.Locked;
     }
 }

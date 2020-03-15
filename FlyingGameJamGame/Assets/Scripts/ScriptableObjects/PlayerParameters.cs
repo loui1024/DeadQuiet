@@ -1,7 +1,6 @@
 ﻿//  Copyright © Loui Eriksson
 //  All Rights Reserved.
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +27,7 @@ public class PlayerParameters : ScriptableObject {
     public bool m_InvertYAxis;
 
     [Header("Movement")]
+    public LayerMask m_CollisionLayers;
     public float m_MoveSpeed;
     public float m_TurnSpeed;
     [Range(0, 1)] public float m_SlowDownRate;
@@ -35,5 +35,4 @@ public class PlayerParameters : ScriptableObject {
     [Header("Weapons")]
     public LayerMask m_TargetingLayers;
     public List<BWeapon> m_PlayerWeapons;
-
 }

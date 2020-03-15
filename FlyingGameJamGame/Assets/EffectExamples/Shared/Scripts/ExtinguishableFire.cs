@@ -1,22 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//  Copyright © Loui Eriksson
+//  All Rights Reserved.
+
+using System.Collections;
 using UnityEngine;
 
-
 /// <summary>
-/// This simulate an extinguishable fire, 
+/// This simulate an extinguishable fire,
 /// </summary>
-public class ExtinguishableFire : MonoBehaviour
-{
+public class ExtinguishableFire : MonoBehaviour {
     public ParticleSystem fireParticleSystem;
     public ParticleSystem smokeParticleSystem;
 
     protected bool m_isExtinguished;
 
-    const float m_FireStartingTime = 2.0f;
+    private const float m_FireStartingTime = 2.0f;
 
-    private void Start()
-    {
+    private void Start() {
         m_isExtinguished = true;
 
         smokeParticleSystem.Stop();
@@ -25,8 +24,7 @@ public class ExtinguishableFire : MonoBehaviour
         StartCoroutine(StartingFire());
     }
 
-    public void Extinguish()
-    {
+    public void Extinguish() {
         if (m_isExtinguished)
             return;
 
@@ -34,15 +32,13 @@ public class ExtinguishableFire : MonoBehaviour
         StartCoroutine(Extinguishing());
     }
 
-    IEnumerator Extinguishing()
-    {
+    private IEnumerator Extinguishing() {
         fireParticleSystem.Stop();
         smokeParticleSystem.time = 0;
         smokeParticleSystem.Play();
 
         float elapsedTime = 0.0f;
-        while (elapsedTime < m_FireStartingTime)
-        {
+        while (elapsedTime < m_FireStartingTime) {
             float ratio = Mathf.Max(0.0f, 1.0f - (elapsedTime / m_FireStartingTime));
 
             fireParticleSystem.transform.localScale = Vector3.one * ratio;
@@ -62,15 +58,13 @@ public class ExtinguishableFire : MonoBehaviour
         StartCoroutine(StartingFire());
     }
 
-    IEnumerator StartingFire()
-    {
+    private IEnumerator StartingFire() {
         smokeParticleSystem.Stop();
         fireParticleSystem.time = 0;
         fireParticleSystem.Play();
 
         float elapsedTime = 0.0f;
-        while (elapsedTime < m_FireStartingTime)
-        {
+        while (elapsedTime < m_FireStartingTime) {
             float ratio = Mathf.Min(1.0f, (elapsedTime / m_FireStartingTime));
 
             fireParticleSystem.transform.localScale = Vector3.one * ratio;
